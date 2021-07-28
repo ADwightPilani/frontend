@@ -398,7 +398,7 @@ class ComparisonCharts extends Component {
 		// let searchval = this.refs.searchInput.value;//get node value or text value
 		// console.log(searchval);
 		let data = [];
-		let endpoint = 'http://localhost:8080/getspfsb';
+		let endpoint = 'https://advaittest.herokuapp.com/getspfsb';
 		//you need to give end slash ony if you call from rest endpint
 		var prevDs = Object.assign({}, compchartConfigs.dataSource);
 		fetch(endpoint, myInit1)
@@ -721,15 +721,10 @@ class ComparisonCharts extends Component {
 
 		return (<>
 			<div className="Chart" align="center">
-				{/* <div className="input-group">
-					<input type="text" className="form-control" placeholder="Search for Projects" ref='searchInput' />
-					<button className="btn btn-default" type="button" onClick={this.dosearch} > Go</button>
-					{chartConfigs.Chart}
-				</div> */}
 
 				<ReactFC {...chart} />
 			</div>
-			<br/>
+			<br/><br/>
 			<Row>
 				<Form.Label>Compare two companies (Pick two Companies to compare and a date range)</Form.Label>
 			</Row>
@@ -789,7 +784,7 @@ class ComparisonCharts extends Component {
 				</Row>
 			</Container>
 
-			<br/>
+			<br/><br/><br/>
 			<Row>
 				<Form.Label>Compare two periods for a Company (Pick a Company and two date ranges)</Form.Label>
 			</Row>
@@ -866,7 +861,7 @@ class ComparisonCharts extends Component {
 				{/* <button className="btn btn-default" type="button" onClick={this.dosearch} > Go</button> */}
 			</Container>
 
-			<br/>
+			<br/><br/><br/>
 			<Row>
 				<Form.Label>Compare two periods for a Sector (Pick a sector and two date ranges)</Form.Label>
 			</Row>
@@ -941,7 +936,7 @@ class ComparisonCharts extends Component {
 				</Row>
 				{/* <button className="btn btn-default" type="button" onClick={this.dosearch} > Go</button> */}
 			</Container>
-			<br/>
+			<br/><br/><br/>
 			<Row>
 				<Form.Label>Compare two sectors (Pick two Sectors to compare and a date range)</Form.Label>
 			</Row>
@@ -1000,6 +995,7 @@ class ComparisonCharts extends Component {
 				</Row>
 				{/* <button className="btn btn-default" type="button" onClick={this.dosearch} > Go</button> */}
 			</Container>
+			<br/><br/><br/><br/>
 			{/* <Col>
 						<Button as="input" type="submit" value="Submit" onClick={this.logout} />
 			</Col> */}

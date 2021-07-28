@@ -34,7 +34,7 @@ class ViewIPO extends React.Component {
                 'Accept': 'application/json'
             }
         };
-        fetch('http://localhost:8080/getAllIPO', myInit1)
+        fetch('https://advaittest.herokuapp.com/getAllIPO', myInit1)
             .then(response => response.json())
             .then(data => { console.log("data :" + data[0]); this.setState({ dataArray: data }) });
 

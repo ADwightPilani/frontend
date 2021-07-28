@@ -42,7 +42,7 @@ class ManageCompStockMap extends React.Component {
 				'Accept': 'application/json'
 			}
 		};
-        fetch('http://localhost:8080/getAllMaps',myInit1)
+        fetch('https://advaittest.herokuapp.com/getAllMaps',myInit1)
             .then(response => response.json())
             .then(data => { console.log("data :" + data[0]); this.setState({ dataArray: data }) });
 

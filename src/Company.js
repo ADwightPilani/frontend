@@ -66,7 +66,7 @@ class Company extends React.Component {
 
         };
         console.log(myInit1.body);
-        let authurl = 'http://localhost:8080/company';
+        let authurl = 'https://advaittest.herokuapp.com/company';
         //this may fail as many records in user are laredy tharer
         //console.log("Date() format: ");
         //console.log("yeh "+this.state.date);
@@ -92,8 +92,10 @@ class Company extends React.Component {
 
     render() {
         return (<>
+            <br/><br/>
             <div class="a">
                 <h2 >Add New Company</h2>
+                <br/><br/>
             </div> <div style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -119,7 +121,7 @@ class Company extends React.Component {
                     <br /><br />
 
                     <label>
-                        ceo</label>
+                        CEO</label>
                     <input
                         name="ceo"
                         value={this.state.ceo}
@@ -127,7 +129,7 @@ class Company extends React.Component {
                     <br /><br />
 
                     <label>
-                        boardOfDirectors</label>
+                        Board Of Directors</label>
                     <input
                         name="boardOfDirectors"
                         value={this.state.boardOfDirectors}
@@ -146,7 +148,7 @@ class Company extends React.Component {
                     <br /><br />
 
                     <label>
-                        companyBrief</label>
+                        Company Brief</label>
                     <input
                         name="companyBrief"
                         value={this.state.companyBrief}

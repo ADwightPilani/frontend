@@ -66,7 +66,7 @@ class ManageStockExchange extends React.Component {
 				'Accept': 'application/json'
 			}
 		};
-        fetch('http://localhost:8080/getAllExchanges',myInit1)
+        fetch('https://advaittest.herokuapp.com/getAllExchanges',myInit1)
             .then(response => response.json())
             .then(data => { console.log("data :" + data[0]); this.setState({ dataArray: data }) });
 

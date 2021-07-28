@@ -50,7 +50,7 @@ class CompStockMap extends React.Component {
 
         };
         console.log(myInit1.body);
-        let authurl = 'http://localhost:8080/mapcompanycode';
+        let authurl = 'https://advaittest.herokuapp.com/mapcompanycode';
         fetch(authurl, myInit1)
             .then((response) => {
                 console.log("data sent");

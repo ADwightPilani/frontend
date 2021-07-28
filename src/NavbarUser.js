@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { Redirect } from 'react-router'
-import './Navbar.css';
+import { Grid, Row, Col, Container } from "react-bootstrap";
 import Navbar from "./Navbar";
 const NavbarUser = (props) => {
   const [isOpen, setOpen] = useState(false);
@@ -14,19 +14,12 @@ const NavbarUser = (props) => {
     sessionStorage.removeItem("user");
     setLogout(true);
     props.authenticated();
-    // console.log("logout isAuth "+!!localStorage.getItem("token"));
-    // props.rerenderParentCallback();
-
-    // history.push("/login");
   };
   if (isLogout) {
-    // alert("Logout: "+isLogout);
-
-    // setLogout(false);
     return (<Redirect to='/login' />);
   }
-  // alert("about to render usernav");
   return (
+     
     <nav className="navbar is-primary"
       role="navigation"
       aria-label="main navigation"
@@ -55,7 +48,7 @@ const NavbarUser = (props) => {
             className="navbar-item"
             activeClassName="is-active"
             to="/viewStockprices"
-          ><a href="#!">Company Details</a>
+          ><a href="#!">Stock Prices</a>
           </NavLink></li>
 
           <li><NavLink
@@ -81,19 +74,19 @@ const NavbarUser = (props) => {
 
 
 
-          <div className="navbar-end">
+          
+
+        </ul>
+        <div className="navbar-end">
             <div className="navbar-item">
-              <div className="buttons"><li><a href="#!">
+              <div className="buttons"><a href="#!">
                 <button className="button is-black" onClick={logoutUser}>
                   Log out
                 </button>
-              </a></li>
+              </a>
               </div>
             </div>
           </div>
-
-        </ul>
-
       </div>
     </nav>
   );

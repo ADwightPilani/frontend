@@ -72,7 +72,7 @@ class SignUp extends React.Component {
 
     };
     console.log(myInit1.body);
-    let authurl = 'http://localhost:8080/register';
+    let authurl = 'https://advaittest.herokuapp.com/register';
     //this may fail as many records in user are laredy tharer
     //console.log("Date() format: ");
     //console.log("yeh "+this.state.date);

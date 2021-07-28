@@ -34,7 +34,7 @@ class ViewCompanies extends React.Component {
         'Accept': 'application/json'
       }
     };
-    fetch('http://localhost:8080/getAllCompanies', myInit1)
+    fetch('https://advaittest.herokuapp.com/getAllCompanies', myInit1)
       .then(response => response.json())
       .then(
         data => {

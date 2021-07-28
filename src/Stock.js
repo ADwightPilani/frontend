@@ -71,7 +71,7 @@ class Stock extends React.Component {
 
     };
     console.log(myInit1.body);
-    let authurl = 'http://localhost:8080/addstockprices';
+    let authurl = 'https://advaittest.herokuapp.com/addstockprices';
     //this may fail as many records in user are laredy tharer
     //console.log("Date() format: ");
     //console.log("yeh "+this.state.date);
@@ -98,8 +98,10 @@ class Stock extends React.Component {
 
   render() {
     return (<>
+    <br/><br/>
       <div class="a">
         <h2 >Add New Stock</h2>
+        <br/><br/>
       </div> <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -108,7 +110,7 @@ class Stock extends React.Component {
       }}>
         <form style={{ fontSize: '15px' }} onSubmit={this.submit}>
           <label>
-            ExchangeName</label>
+            Exchange Name</label>
           <input
             name="exchangename"
 
@@ -117,7 +119,7 @@ class Stock extends React.Component {
 
           <br /><br />
           <label>
-            CompanyCode</label>
+            Company Code</label>
           <input
             name="companycode"
             value={this.state.companycode}
@@ -172,7 +174,7 @@ class Stock extends React.Component {
             onChange={this.handleInputChange} />
 
 
-          <br />
+          <br /><br/>
           <label>
           </label>
           <button type="submit">Save now </button>

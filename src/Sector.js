@@ -50,7 +50,7 @@ class Sector extends React.Component {
 
         };
         console.log(myInit1.body);
-        let authurl = 'http://localhost:8080/addsector';
+        let authurl = 'https://advaittest.herokuapp.com/addsector';
         //this may fail as many records in user are laredy tharer
         //console.log("Date() format: ");
         //console.log("yeh "+this.state.date);
@@ -71,8 +71,10 @@ class Sector extends React.Component {
 
     render() {
         return (<>
+        <br/><br/>
             <div class="a">
                 <h2 >Add New Sector</h2>
+                <br/><br/>
             </div> <div style={{
                 display: 'flex',
                 alignItems: 'center',

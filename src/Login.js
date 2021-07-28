@@ -43,7 +43,7 @@ class Login extends React.Component {
             })
         };
         console.log(myInit1.body);
-        let authurl = 'http://localhost:8080/authenticate';
+        let authurl = 'https://advaittest.herokuapp.com/authenticate';
         if (!!localStorage.getItem("token"))
             localStorage.removeItem("token");
         try {

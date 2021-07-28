@@ -61,7 +61,7 @@ class ManageCompanies extends React.Component {
       })
     };
     // alert(myInit1.body);
-    let authurl = 'http://localhost:8080/editCompany';
+    let authurl = 'https://advaittest.herokuapp.com/editCompany';
     fetch(authurl, myInit1)
       .then((response) => {
         console.log("data sent");

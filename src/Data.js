@@ -53,7 +53,7 @@ function saveCompany(e) {
   };
 
   //console.log(myInit1.body);
-  let authurl = 'http://localhost:8080/addstockprices';
+  let authurl = 'https://advaittest.herokuapp.com/addstockprices';
   fetch(authurl, myInit1)
     .then((response) => {
       console.log("data sent");
