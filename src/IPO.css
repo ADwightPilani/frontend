@@ -1,0 +1,19 @@
+div.a {
+    text-align: center;
+    /* background-color: #f1f1f1; */
+}
+
+.App {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .auto-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+  }

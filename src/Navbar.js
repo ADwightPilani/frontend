@@ -1,25 +1,33 @@
 import React, { useState } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import './Navbar.css';
-const Navbar = ({ history }) => {
+import { Redirect } from 'react-router'
+const Navbar = (props) => {
   const [isOpen, setOpen] = useState(false);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const isAuth = !!localStorage.getItem("token");
 
   const loginUser = () => {
     console.log("hi\n");
     localStorage.setItem("token", "some-login-token");
-    history.push("/profile/Vijit");
+    // history.push("/");
   };
 
   const logoutUser = () => {
+    console.log("logout");
     localStorage.removeItem("token");
-    history.push("/");
+    console.log("logout isAuth "+!!localStorage.getItem("token"));
+    // props.rerenderParentCallback();
+    
+    // history.push("/login");
   };
-
+  // alert("tryin to render this navbar");
+  console.log("above check isAuth "+!!localStorage.getItem("token"));
+  console.log("rendering navbar");
+  
   return (
-    <nav
-      className="navbar is-primary"
+    <nav className="navbar is-primary"
       role="navigation"
       aria-label="main navigation"
     >
@@ -37,64 +45,26 @@ const Navbar = ({ history }) => {
             <span aria-hidden="true"></span> */}
           </a>
         </div>
-            <ul>
-        <div className={`navbar-menu ${isOpen && "is-active"}`}>
+        <ul>
+
+          <div className={`navbar-menu ${isOpen && "is-active"}`}>
             <li><NavLink
               className="navbar-item"
               activeClassName="is-active"
-              to="/uploadSheet"
-            ><a href="#!">Import Data</a>
-            </NavLink></li>
-            
-            <li><NavLink
-              className="navbar-item"
-              activeClassName="is-active"
-              to="/addCompany"
-            ><a href="#!">Create Company</a>
+              to="/signup"
+            ><a href="#!">Sign Up</a>
             </NavLink></li>
 
             <li><NavLink
               className="navbar-item"
               activeClassName="is-active"
-              to="/manageCompanies"
-            ><a href="#!">Manage Companies</a>
-            </NavLink></li>
-
-            <li><NavLink
-              className="navbar-item"
-              activeClassName="is-active"
-              to="/addExchange"
-            ><a href="#!">Manage Exchange</a>
-            </NavLink></li>
-
-            <li><NavLink
-              className="navbar-item"
-              activeClassName="is-active"
-              to="/addIPO"
-            ><a href="#!">Update IPO deatils</a>
+              to="/login"
+            ><a href="#!">Login</a>
             </NavLink></li>
 
           </div>
+        </ul>
 
-            
-          <div className="navbar-end">
-            <div className="navbar-item">
-              <div className="buttons"><li><a href="#!">
-                {!isAuth ? (
-                  <button className="button is-white" onClick={loginUser}>
-                    Log in
-                  </button>
-                ) : (
-                  <button className="button is-black" onClick={logoutUser}>
-                    Log out
-                  </button>
-                )}</a></li>
-              </div>
-            </div>
-          </div>
-          
-          </ul>
-          
       </div>
     </nav>
   );

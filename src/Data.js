@@ -9,16 +9,18 @@ import React from "react";
 import XLSX from "xlsx";
 import './Data.css';
 
+import Table from 'react-bootstrap/Table'
 
-function convertDate(date,time) {
+
+function convertDate(date, time) {
   //var d = new Date();
-  var yy = parseInt(date.substr(6,10)),
-  mn = parseInt(date.substr(3,5)),
-  dd = parseInt(date.substr(0,2)),
-  hh = parseInt(time.substr(0,2)),
-  mm = parseInt(time.substr(3,5)),
-  ss = parseInt(time.substr(6,8));
-  var d= new Date(yy,mn-1,dd,hh,mm,ss);
+  var yy = parseInt(date.substr(6, 10)),
+    mn = parseInt(date.substr(3, 5)),
+    dd = parseInt(date.substr(0, 2)),
+    hh = parseInt(time.substr(0, 2)),
+    mm = parseInt(time.substr(3, 5)),
+    ss = parseInt(time.substr(6, 8));
+  var d = new Date(yy, mn - 1, dd, hh, mm, ss);
   d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
   console.log(d);
   //console.log("yy "+yy+" mn "+mn+" dd "+dd+" hh "+hh+" mm "+mm+" "+" ss "+ss);
@@ -27,36 +29,39 @@ function convertDate(date,time) {
 }
 
 function saveCompany(e) {
-    
+
   //console.log(e);
   //e.preventDefault();
-  const myInit1  = {
+  const myInit1 = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin' : '*',
-    'Vary': 'Origin'.replace,
-    'Accept': 'application/json'
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Vary': 'Origin'.replace,
+      'Authorization':'Bearer '+sessionStorage.getItem("token"),
+      'Accept': 'application/json'
     },
-  
+
     body: JSON.stringify({
-    "exchangename" :e[1],
-    "companycode" :e[0],
-    "date": convertDate(e[3],e[4].trim()),
-    "time" :e[4].trim(),
-    "shareprice":e[2]
-    })  
+      "exchangename": e[1].trim(),
+      "companycode": e[0].trim(),
+      "date": convertDate(e[3], e[4].trim()),
+      "time": e[4].trim(),
+      "shareprice": e[2].trim(),
+      "totalNumberOfShares": e[5].trim()
+    })
   };
 
   //console.log(myInit1.body);
-  let authurl  = 'http://localhost:8080/addstockprices';
+  let authurl = 'http://localhost:8080/addstockprices';
   fetch(authurl, myInit1)
-  .then((response) => {
-    console.log("data sent");
-    return response.text();
-  })
-  .then(function (myJson) {
-    console.log(myJson);
-  });
+    .then((response) => {
+      console.log("data sent");
+      return response.text();
+    })
+    .then(function (myJson) {
+      console.log(myJson);
+    });
 }
 
 export default class SheetJSApp extends React.Component {
@@ -70,7 +75,7 @@ export default class SheetJSApp extends React.Component {
     this.exportFile = this.exportFile.bind(this);
   }
 
-  
+
 
   handleFile(file /*:File*/) {
     /* Boilerplate to set up FileReader */
@@ -79,20 +84,21 @@ export default class SheetJSApp extends React.Component {
     reader.onload = e => {
       /* Parse data */
       const bstr = e.target.result;
-      const wb = XLSX.read(bstr, { type: rABS ? "binary" : "array",cellText:false,cellDates:true });
+      const wb = XLSX.read(bstr, { type: rABS ? "binary" : "array", cellText: false, cellDates: true });
       /* Get first worksheet */
       const wsname = wb.SheetNames[0];
       const ws = wb.Sheets[wsname];
       console.log(rABS, wb);
       /* Convert array of arrays */
-      const data = XLSX.utils.sheet_to_json(ws, { header: 1,raw:false,dateNF:'dd-mm-yyyy' });
+      const data = XLSX.utils.sheet_to_json(ws, { header: 1, raw: false, dateNF: 'dd-mm-yyyy' });
       //saveCompany(data[1]);
-      for(var i=1; i<data.length; i++ ){
-        if(data[i].length===5){
+      for (var i = 1; i < data.length; i++) {
+        if (data[i].length === 6) {
           saveCompany(data[i]);
         }
       }
-      console.log("this data needs to be passed to rest endpoint to save prices");
+
+      console.log("this data needs to be passed to rest endpoint to save prices data[0]" + data[0]);
       /* Update state */
       this.setState({ data: data, cols: make_cols(ws["!ref"]) });
     };
@@ -111,29 +117,32 @@ export default class SheetJSApp extends React.Component {
   }
   render() {
     return (
-      <DragDropFile handleFile={this.handleFile}>
-        <div className="row">
-          <div className="col-xs-12">
-            <DataInput handleFile={this.handleFile} />
+      <div class="a">
+        <DragDropFile handleFile={this.handleFile}>
+          <div className="row">
+            <div className="col-xs-12">
+              <DataInput handleFile={this.handleFile} />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-xs-12"><label></label>
-            <button
-              disabled={!this.state.data.length}
-              className="btn btn-success"
-              onClick={this.exportFile}
-            >
-              Export
-            </button>
+          <br />
+          <div className="row">
+            <div className="col-xs-12"><label></label>
+              <button
+                disabled={!this.state.data.length}
+                className="btn btn-success"
+                onClick={this.exportFile}
+              >
+                Export
+              </button>
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-xs-12">
-            <OutTable data={this.state.data} cols={this.state.cols} />
+          <div className="row">
+            <div className="col-xs-12">
+              <OutTable data={this.state.data} cols={this.state.cols} />
+            </div>
           </div>
-        </div>
-      </DragDropFile>
+        </DragDropFile>
+      </div>
     );
   }
 }
@@ -212,29 +221,38 @@ class DataInput extends React.Component {
     cols:Array<{name:string, key:number|string}>;
 */
 class OutTable extends React.Component {
+
   render() {
-    return (
-      <div className="table-responsive">
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              {this.props.cols.map(c => (
-                <th key={c.key}>{c.name}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.data.map((r, i) => (
-              <tr key={i}>
-                {this.props.cols.map(c => (
-                  <td key={c.key}>{r[c.key]}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
+    const items = [];
+    for (const [index, value] of this.props.data.entries()) {
+      if (value.length >= 6) {
+        console.log("value :" + value);
+        items.push(<tr>
+          <td>{value[0]}</td>
+          <td>{value[1]}</td>
+          <td>{value[2]}</td>
+          <td>{value[3]}</td>
+          <td>{value[4]}</td>
+          <td>{value[5]}</td>
+        </tr>);
+      }
+
+    }
+    if (items.length > 1)
+      return (
+        <div className="table-responsive">
+          <Table striped bordered hover size="sm">
+
+            <h3>Data Uploaded</h3>
+
+            <tbody>
+              {items}
+            </tbody>
+
+          </Table>
+        </div>
+      );
+      else return null;
   }
 }
 
@@ -261,7 +279,7 @@ const SheetJSFT = [
   "html",
   "htm"
 ]
-  .map(function(x) {
+  .map(function (x) {
     return "." + x;
   })
   .join(",");

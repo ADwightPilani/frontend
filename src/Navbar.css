@@ -21,3 +21,18 @@ ul {
   li a:hover {
     background-color: white;
   }
+
+  /* .center-navbar {
+    width:30%;
+    margin-left: 35%;
+  } */
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }

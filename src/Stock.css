@@ -1,0 +1,10 @@
+/* div-a {
+  height: 300px;
+  width: 50%;
+  background-color: #f1f1f1;
+} */
+div.a {
+  text-align: center;
+  /* background-color: #f1f1f1; */
+}
+

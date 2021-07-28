@@ -1,11 +1,22 @@
-
-import React, { useEffect, useState, useRef } from "react";
+import React from 'react';
 //import ReactDOM from 'react-dom';
 //import logo from './logo.svg';
 import './Company.css';
-import Form from 'react-bootstrap/Form';
+function convertDate(date, time) {
+    //var d = new Date();
+    var yy = parseInt(date.substr(0, 4)),
+        mn = parseInt(date.substr(5, 7)),
+        dd = parseInt(date.substr(8, 10)),
+        hh = parseInt(time.substr(0, 2)),
+        mm = parseInt(time.substr(3, 5));
+    var d = new Date(yy, mn - 1, dd, hh, mm);
+    d.setMinutes(d.getMinutes() - d.getTimezoneOffset())
+    //console.log("offset "+d.getTimezoneOffset())
+    return d;
+    //return [date.getFullYear(), mnth, day].join("-");
+}
 
-class Company extends React.Component {
+class StockExchange extends React.Component {
     constructor(props) {
         super(props);
         //console.log("Date() format: "+new Date());
@@ -15,20 +26,17 @@ class Company extends React.Component {
         //timex = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
         this.state = {
             name: '',
-            turnover: '',
-            ceo: '',
-            sectorname: 'insurance',
-            boardOfDirectors: '',
-            companyBrief: '',
-            sectorlist: []
+            brief: '',
+            address: '',
+            remarks: ''
             //totalNumberOfShares:0
         };
         this.submit = this.submit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleInputChange = (event) => {
+    handleInputChange=(event)=> {
         const target = event.target;
 
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -38,9 +46,9 @@ class Company extends React.Component {
             [name]: value
         });
     }
-    handleChange = (event) => {
-        // console.log("ye hai "+event.target.value);
-        this.setState({ sectorname: event.target.value });
+    handleChange=(event)=>{
+        console.log("ye hai "+event.target.value);
+        this.setState({sectorname:event.target.value});
     }
     submit(e) {
         e.preventDefault();
@@ -50,23 +58,21 @@ class Company extends React.Component {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
                 'Vary': 'Origin'.replace,
-                'Authorization': 'Bearer ' + sessionStorage.getItem("token"),
+                'Authorization':'Bearer '+sessionStorage.getItem("token"),
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
                 "name": this.state.name,
-                "turnover": this.state.turnover,
-                "ceo": this.state.ceo,
-                "sectorname": this.state.sectorname,
-                "boardOfDirectors": this.state.boardOfDirectors,
-                "companyBrief": this.state.companyBrief
+                "brief": this.state.brief,
+                "address": this.state.address,
+                "remarks": this.state.remarks
                 //"totalNumberOfShares":this.state.totalNumberOfShares
             })
 
 
         };
         console.log(myInit1.body);
-        let authurl = 'http://localhost:8080/company';
+        let authurl = 'http://localhost:8080/createexchange';
         //this may fail as many records in user are laredy tharer
         //console.log("Date() format: ");
         //console.log("yeh "+this.state.date);
@@ -81,19 +87,16 @@ class Company extends React.Component {
             });
         this.setState({
             name: '',
-            turnover: '',
-            ceo: '',
-            sectorname: 'insurance',
-            boardOfDirectors: '',
-            companyBrief: '',
-            //totalNumberOfShares:0
+            brief: '',
+            address: '',
+            remarks: '',
         });
     }
 
     render() {
         return (<>
             <div class="a">
-                <h2 >Add New Company</h2>
+                <h2 >Add New Exchange</h2>
             </div> <div style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -102,56 +105,36 @@ class Company extends React.Component {
             }}>
                 <form style={{ fontSize: '15px' }} onSubmit={this.submit}>
                     <label>
-                        Company name</label>
+                        Exchange name</label>
                     <input
                         name="name"
                         value={this.state.name}
                         onChange={this.handleInputChange} />
                     <br /><br />
-
                     <label>
-                        Turnover</label>
+                        brief</label>
                     <input
-                        name="turnover"
-                        type="number"
-                        value={this.state.turnover}
+                        name="brief"
+                        value={this.state.brief}
+                        onChange={this.handleInputChange} />
+                    <br /><br />
+                    <label>
+                        Address</label>
+                    <input
+                        name="address"
+                        value={this.state.address}
+                        onChange={this.handleInputChange} />
+                    <br /><br />
+                    <label>
+                        Remarks</label>
+                    <input
+                        name="remarks"
+                        value={this.state.remarks}
                         onChange={this.handleInputChange} />
                     <br /><br />
 
-                    <label>
-                        ceo</label>
-                    <input
-                        name="ceo"
-                        value={this.state.ceo}
-                        onChange={this.handleInputChange} />
-                    <br /><br />
 
-                    <label>
-                        boardOfDirectors</label>
-                    <input
-                        name="boardOfDirectors"
-                        value={this.state.boardOfDirectors}
-                        onChange={this.handleInputChange} />
-                    <br /><br />
-
-                    <label>Sector</label>
-                    <select name="sectorname" value={this.state.sectorname} onChange={this.handleChange}>
-                        <option value="insurance">Insurance</option>
-                        <option value="banking">Banking</option>
-                        <option value="automobile">Automobile</option>
-                        <option value="textile">Textile</option>
-                        <option value="aviation">Aviation</option>
-                        <option value="petrochemical">Petrochemical</option>
-                    </select>
-                    <br /><br />
-
-                    <label>
-                        companyBrief</label>
-                    <input
-                        name="companyBrief"
-                        value={this.state.companyBrief}
-                        onChange={this.handleInputChange} />
-                    <br /><br />
+                    
 
                     {/* <label>
       Number of Shares</label>
@@ -170,4 +153,4 @@ class Company extends React.Component {
         );
     }
 }
-export default Company;
+export default StockExchange;

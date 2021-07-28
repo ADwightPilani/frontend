@@ -1,3 +1,6 @@
 label { 
     display: inline-block; width: 240px; text-align: center; 
   }
+  div.a {
+    text-align: center;
+  }
