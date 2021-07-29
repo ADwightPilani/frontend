@@ -52,18 +52,15 @@ class ViewIPO extends React.Component {
                     <Card >
                         <Card.Body>
                             <Card.Text>
-                                Company Name: {value[2]} &emsp;&emsp;
-                                Company Code: {value[1]} &emsp;&emsp;
-                                Exchange: {value[6]}&emsp;&emsp;
-                                No. of stocks: {value[7]} &emsp;&emsp;
-                                Price of stock: {value[4]}&emsp;&emsp;
-                                DateTime: {value[3]}&emsp;&emsp;
-                                remarks: {value[5]}
+                                Company Name: &emsp;&emsp;{value[2]} <br /><br />
+                                Company Code: &emsp;&emsp;{value[1]}<br /><br />
+                                Exchange: &emsp;&emsp;{value[6]}<br /><br />
+                                No. of stocks: &emsp;&emsp;{value[7]} <br /><br />
+                                Price of stock: &emsp;&emsp;{value[4]}<br /><br />
+                                DateTime: &emsp;&emsp;{value[3]}<br /><br />
+                                remarks: &emsp;&emsp;{value[5]}<br /><br />
                             </Card.Text>
 
-                            <Button onClick={() => this.handleClick(index)}>
-                                Edit
-                            </Button>
 
                         </Card.Body>
                     </Card>
@@ -77,7 +74,7 @@ class ViewIPO extends React.Component {
             <div class="a">
                 <h1 >List of IPOs</h1>
             </div>
-            <div>
+            <div className="grid">
                 {items}
             </div>
         </>

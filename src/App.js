@@ -36,6 +36,7 @@ class App extends React.Component {
     this.authenticated = this.authenticated.bind(this);
     this.setUser = this.setUser.bind(this);
   }
+  
   LogIn = (username, password) => {
     console.log("in App username: " + username + " password: " + password);
   }

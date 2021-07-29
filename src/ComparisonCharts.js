@@ -162,7 +162,7 @@ class ComparisonCharts extends Component {
 				'Accept': 'application/json'
 			}
 		};
-		fetch('http://localhost:8080/getAllCompanies',myInit1)
+		fetch('https://advaittest.herokuapp.com/getAllCompanies',myInit1)
 			.then(response => response.json())
 			.then(
 				data => {
@@ -171,7 +171,7 @@ class ComparisonCharts extends Component {
 				}
 			);
 
-		fetch('http://localhost:8080/getAllSectors',myInit1)
+		fetch('https://advaittest.herokuapp.com/getAllSectors',myInit1)
 			.then(response => response.json())
 			.then(
 				data => {
@@ -294,7 +294,7 @@ class ComparisonCharts extends Component {
 		// let searchval = this.refs.searchInput.value;//get node value or text value
 		// console.log(searchval);
 		let data = [];
-		let endpoint = 'http://localhost:8080/getspfcb';
+		let endpoint = 'https://advaittest.herokuapp.com/getspfcb';
 		//you need to give end slash ony if you call from rest endpint
 		var prevDs = Object.assign({}, compchartConfigs.dataSource);
 		fetch(endpoint, myInit1)
@@ -504,7 +504,7 @@ class ComparisonCharts extends Component {
 		// let searchval = this.refs.searchInput.value;//get node value or text value
 		// console.log(searchval);
 		let data = [];
-		let endpoint = 'http://localhost:8080/getavg';
+		let endpoint = 'https://advaittest.herokuapp.com/getavg';
 		//you need to give end slash ony if you call from rest endpint
 		var prevDs = Object.assign({}, samecompchartConfigs.dataSource);
 		fetch(endpoint, myInit1)
@@ -610,7 +610,7 @@ class ComparisonCharts extends Component {
 		// let searchval = this.refs.searchInput.value;//get node value or text value
 		// console.log(searchval);
 		let data = [];
-		let endpoint = 'http://localhost:8080/getavgsec';
+		let endpoint = 'https://advaittest.herokuapp.com/getavgsec';
 		//you need to give end slash ony if you call from rest endpint
 		var prevDs = Object.assign({}, samecompchartConfigs.dataSource);
 		fetch(endpoint, myInit1)

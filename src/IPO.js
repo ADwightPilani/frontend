@@ -102,6 +102,7 @@ class IPO extends React.Component {
             // openDateTime:'',
             date: '',
             time: '',
+            companycode:'',
             remarks: ''
         });
     }
@@ -144,7 +145,7 @@ class IPO extends React.Component {
                     <br /><br />
 
                     <label>
-                        pricePerShare</label>
+                        Price Per Share</label>
                     <input
                         name="pricePerShare"
                         type="number"
@@ -153,7 +154,7 @@ class IPO extends React.Component {
                     <br /><br />
 
                     <label>
-                        stockexchangename</label>
+                        Stock Exchange Name</label>
                     <input
                         name="stockexchangename"
                         value={this.state.boardOfDirectors}

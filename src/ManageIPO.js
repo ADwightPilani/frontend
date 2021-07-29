@@ -31,7 +31,7 @@ class ManageIPO extends React.Component {
             time: '',
             remarks: '',
             id: '',
-            index:'',
+            index: '',
             isEdit: false
             //totalNumberOfShares:0
         };
@@ -51,7 +51,7 @@ class ManageIPO extends React.Component {
         });
     }
     handleChange = (event) => {
-        console.log("ye hai " + event.target.value);
+        // console.log("ye hai " + event.target.value);
         this.setState({ sectorname: event.target.value });
     }
     submit(e) {
@@ -77,7 +77,7 @@ class ManageIPO extends React.Component {
 
         };
         alert(myInit1.body);
-        let authurl = 'http://localhost:8080/editIpo';
+        let authurl = 'https://advaittest.herokuapp.com/editIpo';
         //this may fail as many records in user are laredy tharer
         //console.log("Date() format: ");
         //console.log("yeh id = "+myInit1.body.id);
@@ -104,6 +104,10 @@ class ManageIPO extends React.Component {
             remarks: '',
             id: '',
         });
+
+        this.setState(prevState => ({
+            isEdit: !prevState.isEdit
+        }));;
     }
     componentDidMount() {
         // Simple GET request using fetch
@@ -117,7 +121,7 @@ class ManageIPO extends React.Component {
                 'Accept': 'application/json'
             }
         };
-        fetch('http://localhost:8080/getAllIPO', myInit1)
+        fetch('https://advaittest.herokuapp.com/getAllIPO', myInit1)
             .then(response => response.json())
             .then(data => { console.log("data :" + data[0]); this.setState({ dataArray: data }) });
 
@@ -135,125 +139,120 @@ class ManageIPO extends React.Component {
         var elements1 = this.state.dataArray;
         if (this.state.isEdit) {
             return <>
-                <div class="a">
-                    <h2 >Edit IPO</h2>
-                </div> <div style={{
-                    display: 'flex',
+                <div class="box9" style={{
+                    // display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    // justifyContent: 'center',
 
                 }}>
-                    <form style={{ fontSize: '15px' }} onSubmit={this.submit}>
-                        <label>
-                            Company name</label>
-                            {elements1[this.state.index][2]}
-                        <br /><br />
+                    <div class="a">
+                        <h2 >Edit IPO</h2>
+                    </div> <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
 
-                        <label>
-                            Company Code</label>
-                            {elements1[this.state.index][1]}
-                        <br /><br />
-
-                        <label>
-                            totalNumberOfShares</label>
-                        <input
-                            name="totalNumberOfShares"
-                            type="number"
-                            value={this.state.turnover}
-                            onChange={this.handleInputChange} />
-                        <br /><br />
-
-                        <label>
-                            pricePerShare</label>
-                        <input
-                            name="pricePerShare"
-                            type="number"
-                            value={this.state.pricePerShare}
-                            onChange={this.handleInputChange} />
-                        <br /><br />
-
-                        
+                    }}>
+                        <form style={{ fontSize: '15px' }} onSubmit={this.submit}>
                             <label>
-                            Stock Exchange Name</label>
+                                Company name</label>
+                            {elements1[this.state.index][2]}
+                            <br /><br />
+
+                            <label>
+                                Company Code</label>
+                            {elements1[this.state.index][1]}
+                            <br /><br />
+
+                            <label>
+                                Total No. Of Shares</label>
+                            <input
+                                name="totalNumberOfShares"
+                                type="number"
+                                value={this.state.turnover}
+                                onChange={this.handleInputChange} />
+                            <br /><br />
+
+                            <label>
+                                Price Per Share</label>
+                            <input
+                                name="pricePerShare"
+                                type="number"
+                                value={this.state.pricePerShare}
+                                onChange={this.handleInputChange} />
+                            <br /><br />
+
+
+                            <label>
+                                Stock Exchange Name</label>
                             {elements1[this.state.index][6]}
-                        <br /><br />
+                            <br /><br />
 
-                        <label>
-                            Date</label>
-                        <input
-                            name="date"
-                            type="date"
-                            value={this.state.date}
-                            onChange={this.handleInputChange} />
+                            <label>
+                                Date</label>
+                            <input
+                                name="date"
+                                type="date"
+                                value={this.state.date}
+                                onChange={this.handleInputChange} />
 
-                        <br /><br />
-                        <label>
-                            Time</label>
-                        <input
-                            name="time"
-                            type="time"
-                            value={this.state.time}
-                            onChange={this.handleInputChange} />
+                            <br /><br />
+                            <label>
+                                Time</label>
+                            <input
+                                name="time"
+                                type="time"
+                                value={this.state.time}
+                                onChange={this.handleInputChange} />
 
-                        <br /><br />
+                            <br /><br />
 
-                        <label>
-                            remarks</label>
-                        <input
-                            name="remarks"
-                            value={this.state.remarks}
-                            onChange={this.handleInputChange} />
-                        <br /><br />
+                            <label>
+                                remarks</label>
+                            <input
+                                name="remarks"
+                                value={this.state.remarks}
+                                onChange={this.handleInputChange} />
+                            <br /><br />
 
-                        {/* <label>
-      Number of Shares</label>
-          <input
-            name="totalNumberOfShares"
-            type="number"
-            value={this.state.totalNumberOfShares}
-            onChange={this.handleInputChange} />
-        
-        
-        <br /> */}<label></label>
-                        <button type="submit" >Save now {this.state.id}</button>
+                            <label></label>
+                            <button type="submit" >Save now {this.state.id}</button>
 
-                        &emsp;
-                        <button onClick={() => this.handleClick()}>
-                            Cancel
-                            {/* {this.state.id = value[0]} */}
-                        </button>
-                    </form></div>
-
+                            &emsp;
+                            <button onClick={() => this.handleClick()}>
+                                Cancel
+                                {/* {this.state.id = value[0]} */}
+                            </button>
+                        </form></div>
+                </div>
             </>;
         }
         const items = [];
         try {
             for (const [index, value] of elements1.entries()) {
-                // items.push(<li key={index}>{value}</li>)
-                // this.setState({id : value[0]});
-                // this.state.id = value[0];
                 items.push(
-                    <Card >
-                        <Card.Body>
-                            <Card.Text>
-                                Company Name: {value[2]} &emsp;&emsp;
-                                Company Code: {value[1]} &emsp;&emsp;
-                                Exchange: {value[6]}&emsp;&emsp;
-                                No. of stocks: {value[7]} &emsp;&emsp;
-                                Price of stock: {value[4]}&emsp;&emsp;
-                                DateTime: {value[3]}&emsp;&emsp;
-                                remarks: {value[5]}
-                            </Card.Text>
-                            {/* <Card.Link > */}
-                            <Button onClick={() => this.handleClick(index)}>
-                                Edit
-                                {/* {this.state.id = value[0]} */}
-                            </Button>
-                            {/* </Card.Link> */}
-                            {/* <Card.Link href="#">Another Link</Card.Link> */}
+                    <div class="box10" style={{
+                        // display: 'flex',
+                        alignItems: 'center',
+                        // justifyContent: 'center',
 
-                        </Card.Body>
-                    </Card>
+                    }}>
+                        <h6 class="card-title">
+                            Company Name: &emsp;{value[2]} <br /><br />
+                            Company Code: &emsp;{value[1]}<br /><br />
+                            Exchange: &emsp;{value[6]}<br /><br />
+                            No. of stocks: &emsp;{value[7]} <br /><br />
+                            Price of stock: &emsp;{value[4]}<br /><br />
+                            DateTime: &emsp;{value[3]}<br /><br />
+                            remarks: &emsp;{value[5]}<br /><br />
+                        </h6>
+                        {/* <Card.Link > */}
+                        <label></label>
+                        <Button onClick={() => this.handleClick(index)}>
+                            Edit
+                        </Button>
+
+                    </div>
                 )
             }
         } catch (TypeError) {
@@ -264,7 +263,7 @@ class ManageIPO extends React.Component {
             <div class="a">
                 <h1 >List of IPOs</h1>
             </div>
-            <div>
+            <div className="grid">
                 {items}
             </div>
         </>

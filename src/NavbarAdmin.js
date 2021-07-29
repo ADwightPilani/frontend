@@ -67,13 +67,6 @@ const NavbarAdmin = (props) => {
             <li><NavLink
               className="navbar-item"
               activeClassName="is-active"
-              to="/manageCompStockMap"
-            ><a href="#!">View CompStockMap</a>
-            </NavLink></li>
-
-            <li><NavLink
-              className="navbar-item"
-              activeClassName="is-active"
               to="/addSector"
             ><a href="#!">Add Sector</a>
             </NavLink></li>

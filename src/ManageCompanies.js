@@ -17,7 +17,8 @@ class ManageCompanies extends React.Component {
       companyBrief: '',
       id: '',
       index: '',
-      isEdit: false
+      isEdit: false,
+      update:''
       //totalNumberOfShares:0
     };
     this.handleClick = this.handleClick.bind(this);
@@ -52,11 +53,11 @@ class ManageCompanies extends React.Component {
         'Accept': 'application/json'
       },
       body: JSON.stringify({
-        "companyname":this.state.dataArray[this.state.index][4],
-        "turnover":this.state.turnover,
-        "ceo":this.state.ceo,
-        "boardOfDirectors":this.state.boardOfDirectors,
-        "brief":this.state.companyBrief
+        "companyname": this.state.dataArray[this.state.index][4],
+        "turnover": this.state.turnover,
+        "ceo": this.state.ceo,
+        "boardOfDirectors": this.state.boardOfDirectors,
+        "brief": this.state.companyBrief
         //"totalNumberOfShares":this.state.totalNumberOfShares
       })
     };
@@ -97,14 +98,14 @@ class ManageCompanies extends React.Component {
         'Accept': 'application/json'
       },
       body: JSON.stringify({
-        "id": this.state.id
+        "id": this.state.dataArray[this.state.index][0]
         //"totalNumberOfShares":this.state.totalNumberOfShares
       })
 
 
     };
     console.log(myInit2.body);
-    let authurl = 'http://localhost:8080/deleteCompany';
+    let authurl = 'https://advaittest.herokuapp.com/deleteCompany';
     //this may fail as many records in user are laredy tharer
     //console.log("Date() format: ");
     //console.log("yeh id = "+myInit1.body.id);
@@ -114,8 +115,11 @@ class ManageCompanies extends React.Component {
         console.log("delete request sent");
         return response.text();
       })
-      .then(function (myJson) {
+      .then((myJson)=>{
         console.log(myJson);
+        this.setState({
+          update:0
+        });
       });
     this.setState(this.state);
     this.setState(prevState => ({
@@ -135,7 +139,7 @@ class ManageCompanies extends React.Component {
         'Accept': 'application/json'
       }
     };
-    fetch('http://localhost:8080/getAllCompanies', myInit1)
+    fetch('https://advaittest.herokuapp.com/getAllCompanies', myInit1)
       .then(response => response.json())
       .then(
         data => {
@@ -153,7 +157,7 @@ class ManageCompanies extends React.Component {
     }));
   }
   render() {
-    console.log("hii" + this.state.dataArray[0]);
+    // console.log("hii" + this.state.dataArray[0]);
     // var elements1 = [
     //   ['45','0board', '0ceo', '0brief', '0company name','banking','6','0seven'],
     //   ['66','1one', '1two', '1three', '1four','1five','1six','1seven']
@@ -242,6 +246,7 @@ class ManageCompanies extends React.Component {
     const items = [];
     try {
       for (const [index, value] of elements1.entries()) {
+        // alert(value);
         items.push(
           <div class="box10" style={{
             // display: 'flex',
@@ -256,6 +261,7 @@ class ManageCompanies extends React.Component {
               Sector:&emsp; {value[5]}<br /><br />
               Board of Directors: &emsp;{value[1]}<br /><br />
               Brief: &emsp;{value[3]} <br /><br />
+              {/* ID: &emsp;{value[2]} <br /><br /> */}
             </h6>
             {/* <Card.Link > */}
             <label></label>
